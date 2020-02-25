@@ -1,5 +1,5 @@
 echo Moving to literatur...
-cd ..
+cd ../../..
 cd bibliography
 cd literature
 
@@ -15,25 +15,23 @@ sed -i "s/^!\[Quellen.*/![Quellen](https:\/\/img.shields.io\/static\/v1\?label=Q
 
 echo Done
 
-cd utils
 echo Starting python script to count pages...
-python3 getPages.py
+python3 .internals/scripts/utils/getPages.py
 
 echo Reading result...
-inputPages="pages.txt"
+inputPages=".internals/scripts/utils/pages.txt"
 while IFS= read -r line
 do
     page=$line
 done < "$inputPages"
 
-inputProg="progress.txt"
+inputProg=".internals/scripts/utils/progress.txt"
 while IFS= read -r line
 do
     progress=$line
 done < "$inputProg"
 
 echo Replacing label with $page...
-cd ..
 
 sed -i "s/^!\[Seiten.*/![Seiten](https:\/\/img.shields.io\/static\/v1\?label=Seiten\&message=${page}\&color=blue\&logo=LibreOffice\&style=for-the-badge)/" README.md
 
